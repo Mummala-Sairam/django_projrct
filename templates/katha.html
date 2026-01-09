@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Khata</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* NAVBAR */
+        /* Home Button Styles */
+.home-btn {
+    text-decoration: none;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: white;
+    color: #007bff;
+}
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 35px;
+            background: #007bff;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-links button:hover {
+            background: white;
+            color: #0056b3;
+        }
+
+        /* FORM CONTAINER */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .form-card {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-card h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #0056b3;
+        }
+
+        /* INPUTS */
+        label {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 6px rgba(0,123,255,0.4);
+        }
+
+        /* SUBMIT BUTTON */
+        button.submit-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: #007bff;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.submit-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <!-- Home Button in Navbar -->
+<a href="{% url 'main' %}" class="home-btn">Home</a>
+
+
+    <div class="nav-links">
+            <a href="{% url 'createaccount' %}"><button>Create Account</button></a>
+            <a href="{% url 'createkatha' %}"><button>Create katha</button></a>
+            <a href="{% url 'viewkathas' %}"><button>view katha</button></a>
+            <a href="{% url 'makepayment' %}"><button>Make Payment</button></a>
+            <a href="{% url 'search' %}"><button>Search</button></a>
+            <a href="{% url 'all_data' %}"><button>All Data</button></a>
+            <a href="{% url 'logout' %}"><button class="logout">Logout</button></a>
+    </div>
+</div>
+
+<!-- FORM -->
+<div class="container">
+    <div class="form-card">
+        <h3>Create Khata Account</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Khata Holder Name</label>
+            <input type="text" name="user_name" placeholder="Enter full name" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <label>Phone Number</label>
+            <input type="text" name="phone_number" placeholder="Enter phone number" required>
+
+            <label>Address</label>
+            <input type="text" name="address" placeholder="Enter address" required>
+
+            <button type="submit" class="submit-btn">Create Khata</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

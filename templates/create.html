@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #c3f0c7, #e8f9ec);
+        }
+
+        /* NAVBAR */
+        /* Home Button Styles */
+.home-btn {
+    text-decoration: none;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: white;
+    color: #007bff;
+}
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 35px;
+            background: #28a745;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+        }
+
+        .navbar button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .navbar button:hover {
+            background: white;
+            color: #218838;
+        }
+
+        .logout {
+            border-color: #ffd6d6;
+            color: #ffd6d6;
+        }
+
+        .logout:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        /* PAGE CONTENT */
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 70px 20px;
+        }
+
+        /* FORM CARD */
+        form {
+            background: white;
+            width: 420px;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            border-top: 5px solid #28a745;
+        }
+
+        form h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #218838;
+            font-size: 22px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 6px rgba(40,167,69,0.4);
+        }
+
+        /* SUBMIT BUTTON */
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 25px;
+            border: none;
+            background: #28a745;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.25s ease;
+        }
+
+        .submit-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <!-- Home Button in Navbar -->
+<a href="{% url 'main' %}" class="home-btn">Home</a>
+
+
+    <div class="nav-links">
+        <a href="{% url 'createaccount' %}"><button>Create Account</button></a>
+        <a href="{% url 'createkatha' %}"><button>Create katha</button></a>
+        <a href="{% url 'viewkathas' %}"><button>view katha</button></a>
+        <a href="{% url 'makepayment' %}"><button>Make Payment</button></a>
+        <a href="{% url 'search' %}"><button>Search</button></a>
+        <a href="{% url 'all_data' %}"><button>All Data</button></a>
+        <a href="{% url 'logout' %}"><button class="logout">Logout</button></a>
+    </div>
+</div>
+
+<!-- FORM CONTENT -->
+<div class="content">
+    <form action="/createaccount/" method="POST">
+        {% csrf_token %}
+        <h1>Create Account</h1>
+
+        <label>User Name</label>
+        <input type="text" name="user_name" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+</div>
+
+</body>
+</html>

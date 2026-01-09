@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f9fbff);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 35px;
+            background: #007bff;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+
+        .home-btn {
+            text-decoration: none;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            background: white;
+            color: #007bff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links button:hover {
+            background: white;
+            color: #007bff;
+        }
+
+        .logout {
+            border-color: #ffd6d6;
+            color: #ffd6d6;
+        }
+
+        .logout:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* SEARCH BOX */
+        .search-box {
+            background: white;
+            padding: 30px;
+            width: 520px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        .search-box h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .search-box form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            padding: 12px 26px;
+            border-radius: 25px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-box button:hover {
+            background: #0056b3;
+        }
+
+        /* TABLE */
+        .result-table {
+            margin-top: 35px;
+            width: 90%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .result-table th,
+        .result-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-table th {
+            background: #007bff;
+            color: white;
+        }
+
+        .result-table tr:hover {
+            background: #f1f6ff;
+        }
+
+        .no-data {
+            margin-top: 25px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="{% url 'main' %}" class="home-btn">Home</a>
+
+    <div class="nav-links">
+        <a href="{% url 'createaccount' %}"><button>Create Account</button></a>
+        <a href="{% url 'createkatha' %}"><button>Create Katha</button></a>
+        <a href="{% url 'viewkathas' %}"><button>view katha</button></a>
+        <a href="{% url 'makepayment' %}"><button>Make Payment</button></a>
+        <a href="{% url 'search' %}"><button>Search</button></a>
+        <a href="{% url 'all_data' %}"><button>All Data</button></a>
+        <a href="{% url 'logout' %}"><button class="logout">Logout</button></a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+    <div class="search-box">
+        <h3>Search Records</h3>
+        <form method="GET">
+            <input type="text" name="query" placeholder="Search by name / phone / id" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    {% if data %}
+    <table class="result-table" style="display: table;">
+        <thead>
+            <tr>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>Phone</th>
+                    <th>Type</th>
+                    <th>Total</th>
+                    <th>Mode</th>
+                    <th>Address</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.user_name }}</td>
+                    <td>{{ i.phone_number }}</td>
+                    <td>{{ i.type }}</td>
+                    <td>{{ i.total }}</td>
+                    <td>{{ i.mode }}</td>
+                    <td>{{ i.address }}</td>
+                    <td>{{ i.amount }}</td>
+                    <td>{{i.purchase_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="no-data">🔍 Enter a value and search</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

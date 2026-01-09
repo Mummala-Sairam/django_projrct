@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Khata Holders</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f6f9;
+        }
+        /* Home Button Styles */
+.home-btn {
+    text-decoration: none;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: white;
+    color: #007bff;
+}
+
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 35px;
+            background: #0d6efd;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links button:hover {
+            background: white;
+            color: #0d6efd;
+        }
+
+        .logout {
+            border-color: #ffd6d6;
+            color: #ffd6d6;
+        }
+
+        .logout:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        /* CONTENT */
+        .container {
+            padding: 40px;
+        }
+
+        /* CARD */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            padding: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #0d6efd;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #0d6efd;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr:hover {
+            background-color: #f1f5ff;
+        }
+
+        /* BUTTON */
+        .btn {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: #157347;
+        }
+
+        /* EMPTY */
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <!-- Home Button in Navbar -->
+<a href="{% url 'main' %}" class="home-btn">Home</a>
+    
+    <div class="nav-links">
+        <a href="{% url 'main' %}"><button>Main</button></a>
+        <a href="{% url 'createaccount' %}"><button>Create Account</button></a>
+        <a href="{% url 'createkatha' %}"><button>Create Khata</button></a>
+        <a href="{% url 'makepayment' %}"><button>Make Payment</button></a>
+        <a href="{% url 'search' %}"><button>Search</button></a>
+        <a href="{% url 'logout' %}"><button class="logout">Logout</button></a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="card">
+        <h2>Khata Holders</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+
+            {% for katha in data %}
+            <tr>
+                <td>{{ katha.id }}</td>
+                <td>{{ katha.user_name }}</td>
+                <td>{{ katha.phone_number }}</td>
+                <td>{{ katha.address }}</td>
+                <td>
+                    <a href="{% url 'personpayments' katha.id %}">
+                        <button class="btn">View Payments</button>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="empty">No Khata holders found</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
